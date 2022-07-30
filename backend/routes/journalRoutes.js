@@ -2,15 +2,15 @@ const express = require('express')
 const router = express.Router()
 const {getJournal, createJournal, updateJournal, deleteJournal} = require("../controllers/journalController")
 
+const {protect} = require('../middleware/authmiddleware')
+router.get('/', protect ,getJournal)
 
-router.get('/', (getJournal))
 
+router.post('/', protect, createJournal)
 
-router.post('/', (createJournal))
+router.put('/:id', protect, updateJournal)
 
-router.put('/:id', (updateJournal))
-
-router.delete('/:id', (deleteJournal))
+router.delete('/:id', protect, deleteJournal)
 
 
 module.exports = router
